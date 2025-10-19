@@ -1,0 +1,161 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 7,
+  "margin-left": 5,
+  "margin-right": 5,
+  "modules-left": ["hyprland/workspaces"],
+  "height": 20,
+  "modules-center": ["clock","custom/taskmanager"],
+  "modules-right": ["custom/prev", "custom/g4music", "custom/next", "network", "bluetooth", "battery", "pulseaudio", "custom/power"],
+
+
+  "custom/power": {
+  "format": "<span size='16000'>⏻</span><span rise='3000'></span>",
+  "on-click": "~/.config/waybar/scripts/power-menu.sh",
+  "tooltip": false
+},
+  "custom/taskmanager": {
+  "format": "<span size='20000'></span>",
+  "on-click": "missioncenter"
+
+  },
+
+
+  "hyprland/workspaces": {
+    "format": "",
+    "on-click": "activate"
+  },
+
+  "hyprland/window": {
+    "format": " {} ",
+    "max-length": 60,
+    "separate-outputs": true,
+    "offscreen-css": true,
+    "offscreen-css-text": "(inactive)",
+    "rewrite": {
+      "(.*) — Mozilla Firefox": " $1",
+      "(.*) - fish": "> [$1]",
+      "(.*) - zsh": "> [$1]",
+      "(.*) - kitty": "> [$1]"
+    }
+  },
+
+    "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 20,
+    "all-outputs": false,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+      "rofi",
+      "firefox",
+      "kitty",
+      "jetbrains-studio",
+      "Brave-browser",
+      "Spotify",
+      "Zen Browser"
+    ]
+  },
+
+  "clock": {
+    "interval": 1,
+    "format": "{:%b %d • %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "days": "<span color='#ebdbb2'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ebdbb2'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "network": {
+  "format-wifi": "<span size='20000'>󰖩</span><span rise='3000'></span>",
+  "format-ethernet": "<span size='20000'></span><span rise='3000'> {ifname}</span>",
+  "format-disconnected": "<span size='20000'>󰖪</span><span rise='3000'> Disconnected</span>",
+  "on-click": "nm-connection-editor",
+  "tooltip": true,
+  "tooltip-format": " {bandwidthDownBits}  {bandwidthUpBits}",
+  "escape": true
+},
+
+  "bluetooth": {
+  "format": "<span size='20000'></span>",
+  "format-connected": "<span size='20000'></span><span rise='3000'> </span>",
+  "format-connected-battery": "<span size='20000' color='#00BFFF'></span><span rise='3000'> {device_battery_percentage}%</span>",
+  "tooltip-format": "{controller_alias}\n{num_connections} connected",
+  "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
+  "tooltip-format-enumerate-connected": "{device_alias}",
+  "tooltip-format-enumerate-connected-battery": "{device_alias} {device_battery_percentage}%",
+  "interval": 5,
+  "on-click": "blueman-manager",
+  "escape": true
+},
+
+  "battery": {
+  "format": "<span size='20000'>{icon}</span><span rise='3000'> {capacity}%</span>",
+  "format-icons": ["", "", "", "", ""],
+  "on-click": "~/.config/waybar/power-menu.sh",
+  "tooltip": true,
+  "tooltip-format": "{time}"
+},
+
+  "pulseaudio": {
+  "format": "<span size='20000'>{icon}</span><span rise='3000'> {volume}%</span>",
+  "format-muted": "<span size='20000'></span><span rise='3000'> Muted</span>",
+  "format-icons": [
+    "",  
+    "",
+    ""   
+  ],
+  "on-click": "pavucontrol",
+  "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+  "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+},
+
+"custom/g4music": {
+  "exec": "status=$(playerctl -p com.github.neithern.g4music status 2>/dev/null || echo Stopped); if [ \"$status\" = \"Playing\" ]; then echo '{\"text\": \"\", \"class\": \"custom-g4music\"}'; elif [ \"$status\" = \"Paused\" ]; then echo '{\"text\": \"\", \"class\": \"custom-g4music\"}'; else echo '{\"text\": \"\", \"class\": \"custom-g4music\"}'; fi",
+  "return-type": "json",
+  "interval": 2,
+  "tooltip": true,
+  "on-click": "playerctl -p com.github.neithern.g4music play-pause",
+  "on-click-right": "eww open music_volume_popup"
+},
+
+"custom/prev": {
+  "exec": "echo '{\"text\": \"\", \"class\": \"custom-prev\"}'",
+  "tooltip": "Previous Track",
+  "return-type": "json",
+  "on-click": "playerctl -p com.github.neithern.g4music previous"
+},
+
+"custom/next": {
+  "exec": "echo '{\"text\": \"\", \"class\": \"custom-next\"}'",
+  "tooltip": "Next Track",
+  "return-type": "json",
+  "on-click": "playerctl -p com.github.neithern.g4music next"
+},
+
+  "custom/music_control": {
+  "exec": "echo '{\"text\": \"🎵\", \"class\": \"music-tab\"}'",
+  "tooltip": "Show music controls",
+  "return-type": "json",
+  "on-click": "eww open --toggle music_popup"
+}
+
+}

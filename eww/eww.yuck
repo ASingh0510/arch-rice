@@ -1,0 +1,22 @@
+(defwidget sysinfo [] 
+  (box :orientation "vertical" :class "popup-box" :spacing 10
+    (box :orientation "horizontal" :spacing 15
+      (label :text " Arch Linux")
+      (label :text "󰍹 Hyprland")
+      (label :text " Up: {{ uptime }}")
+    )
+    (calendar)
+  )
+)
+
+(defwindow music_popup
+  :anchor [top right]  ;; or wherever you want
+  :visible false
+  :transition slide
+  (box
+    :orientation "horizontal"
+    :spacing 10
+    :class "music-buttons"
+    (button :onclick "playerctl previous" "")
+    (button :onclick "playerctl play-pause" "")
+    (button :onclick "playerctl next" "")))

@@ -1,0 +1,37 @@
+* {
+  all: unset;
+  font-family: JetBrainsMono Nerd Font;
+  color: #3c3836;
+}
+
+.popup-box {
+  background-color: #fef1e6;
+  border-radius: 20px;
+  padding: 20px;
+  border: 2px solid #e0c1a0;
+}
+
+label {
+  font-size: 16px;
+}
+
+calendar {
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.spotify-volume-box {
+  background-color: #1DB954;
+  padding: 10px;
+  border-radius: 15px;
+  color: black;
+  font-family: "CaskaydiaMono Nerd Font Mono";
+  font-size: 16px;
+}
+
+scale {
+  min-width: 120px;
+  margin-left: 10px;
+}
+
+

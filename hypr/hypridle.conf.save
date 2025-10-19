@@ -1,0 +1,10 @@
+7;6u9;6uneral {
+    lock_cmd = pidof hyprlock || hyprlock       # avoid starting multiple hyprlock instances.
+}
+
+listener {
+    timeout = 500
+    on-timeout = loginctl lock-session
+}
+
+

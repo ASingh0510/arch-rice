@@ -1,0 +1,9 @@
+# hyprviz configuration (created automatically)
+
+general {
+    gaps_in = 5
+}
+
+cursor {
+    invisible = true
+}
